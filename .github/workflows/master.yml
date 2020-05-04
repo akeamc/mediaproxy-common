@@ -92,4 +92,4 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: publish
-          args: --token ${{ secrets.CARGO_TOKEN }}
+          args: --token ${{ secrets.CRATES_TOKEN }}
