@@ -1,6 +1,6 @@
 # Media Proxy Common
 
-![](https://github.com/ThePicoNerd/mediaproxy-common/workflows/Master%20Release/badge.svg) ![](https://meritbadge.herokuapp.com/mediaproxy-common) ![](https://docs.rs/mediaproxy-common/badge.svg)
+![](https://github.com/ThePicoNerd/mediaproxy-common/workflows/Master%20Release/badge.svg) ![](https://img.shields.io/crates/v/mediaproxy-common) ![](https://docs.rs/mediaproxy-common/badge.svg)
 
 ## Documentation
 
