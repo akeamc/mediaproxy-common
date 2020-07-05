@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
       - uses: actions/cache@v2
         with:
           path: |
@@ -33,6 +35,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
       - uses: actions/cache@v2
         with:
           path: |
@@ -50,6 +54,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
       - run: rustup component add rustfmt
       - uses: actions-rs/cargo@v1
         with:
@@ -62,6 +68,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
       - run: rustup component add clippy
       - uses: actions/cache@v2
         with:
