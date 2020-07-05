@@ -17,7 +17,7 @@ custom_error! {pub FingerprintError
 /// The default object that clients use to make requests to Media Proxy.
 #[derive(Serialize, Deserialize)]
 pub struct Query {
-    /// URL of the source image. Input formats currently supported are the same as those of the [image] crate.
+    /// URL of the source image. Input formats currently supported are the same as those of the [image](/image) crate.
     pub source: String,
 
     /// The width of the processed image.
