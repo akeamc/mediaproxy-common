@@ -18,6 +18,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          profile: minimal
       - uses: actions/cache@v2
         with:
           path: |
@@ -37,6 +38,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          profile: minimal
       - uses: actions/cache@v2
         with:
           path: |
@@ -56,6 +58,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          profile: minimal
       - run: rustup component add rustfmt
       - uses: actions-rs/cargo@v1
         with:
@@ -70,6 +73,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          profile: minimal
       - run: rustup component add clippy
       - uses: actions/cache@v2
         with:
