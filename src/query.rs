@@ -60,8 +60,8 @@ impl Query {
     /// # Example
     ///
     /// ```
-    /// use doc::Query;
-    /// let query = Query::from_fingerprint("eyJzb3VyY2UiOiJodHRwczovL2R1bW15aW1hZ2UuY29tLzYwMHg0MDAvMDAwL2ZmZiIsIndpZHRoIjpudWxsLCJoZWlnaHQiOm51bGwsImZvcm1hdCI6ImpwZWcifQ".to_string())
+    /// use mediaproxy_common::query::Query;
+    /// let query = Query::from_fingerprint("eyJzb3VyY2UiOiJodHRwczovL2R1bW15aW1hZ2UuY29tLzYwMHg0MDAvMDAwL2ZmZiIsIndpZHRoIjpudWxsLCJoZWlnaHQiOm51bGwsImZvcm1hdCI6ImpwZWcifQ".to_string());
     /// ```
     pub fn from_fingerprint(fingerprint: String) -> Result<Query, QueryFingerprintConversionError> {
         let bytes = base64::decode_config(fingerprint, b64_config())?;
