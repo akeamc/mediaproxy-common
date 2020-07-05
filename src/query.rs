@@ -1,29 +1,17 @@
+use crate::fields::{OutputFormat, ResizeStrategy};
 use base64::encode_config;
 use custom_error::custom_error;
 use serde::{Deserialize, Serialize};
-
-#[derive(Serialize, Deserialize)]
-pub enum ImageProcessingOutput {
-    #[serde(rename = "jpeg")]
-    #[serde(alias = "jpg")]
-    Jpeg,
-    #[serde(rename = "png")]
-    Png,
-    #[serde(rename = "webp")]
-    WebP,
-    #[serde(rename = "gif")]
-    Gif,
-}
 
 /// The default URL-safe base64 configuration.
 fn b64_config() -> base64::Config {
     base64::Config::new(base64::CharacterSet::UrlSafe, false)
 }
 
-custom_error! {pub QueryFingerprintConversionError
-  JsonError{source: serde_json::Error} = "Something went wrong when (de)serializing JSON.",
-  Base64Error{source: base64::DecodeError} = "Something went wrong when decoding Base64.",
-  UnicodeError{source: std::str::Utf8Error} = "Could not convert byte array to string!"
+custom_error! {pub FingerprintError
+    JsonError{source: serde_json::Error} = "Something went wrong when (de)serializing JSON.",
+    Base64Error{source: base64::DecodeError} = "Something went wrong when decoding Base64.",
+    UnicodeError{source: std::str::Utf8Error} = "Could not convert byte array to string!"
 }
 
 /// The default object that clients use to make requests to Media Proxy.
@@ -39,7 +27,11 @@ pub struct Query {
     pub height: Option<u32>,
 
     /// Output format of the image.
-    pub format: ImageProcessingOutput,
+    pub format: OutputFormat,
+
+    /// Strategy for resizing image.
+    #[serde(rename = "fit")]
+    pub fit_mode: Option<ResizeStrategy>,
 }
 
 impl Query {
@@ -63,7 +55,7 @@ impl Query {
     /// use mediaproxy_common::query::Query;
     /// let query = Query::from_fingerprint("eyJzb3VyY2UiOiJodHRwczovL2R1bW15aW1hZ2UuY29tLzYwMHg0MDAvMDAwL2ZmZiIsIndpZHRoIjpudWxsLCJoZWlnaHQiOm51bGwsImZvcm1hdCI6ImpwZWcifQ".to_string());
     /// ```
-    pub fn from_fingerprint(fingerprint: String) -> Result<Query, QueryFingerprintConversionError> {
+    pub fn from_fingerprint(fingerprint: String) -> Result<Query, FingerprintError> {
         let bytes = base64::decode_config(fingerprint, b64_config())?;
         let json = std::str::from_utf8(&bytes)?;
         let query: Query = serde_json::from_str(json)?;
@@ -79,12 +71,13 @@ mod tests {
     fn query_to_fingerprint() {
         let query = Query {
             source: String::from("https://dummyimage.com/600x400/000/fff"),
-            format: ImageProcessingOutput::Jpeg,
+            format: OutputFormat::Jpeg,
             width: None,
             height: None,
+            fit_mode: Some(ResizeStrategy::default()),
         };
 
-        assert_eq!(query.to_fingerprint(), String::from("eyJzb3VyY2UiOiJodHRwczovL2R1bW15aW1hZ2UuY29tLzYwMHg0MDAvMDAwL2ZmZiIsIndpZHRoIjpudWxsLCJoZWlnaHQiOm51bGwsImZvcm1hdCI6ImpwZWcifQ"));
+        assert_eq!(query.to_fingerprint(), String::from("eyJzb3VyY2UiOiJodHRwczovL2R1bW15aW1hZ2UuY29tLzYwMHg0MDAvMDAwL2ZmZiIsIndpZHRoIjpudWxsLCJoZWlnaHQiOm51bGwsImZvcm1hdCI6ImpwZWciLCJmaXQiOiJjcm9wIn0"));
     }
 
     #[test]

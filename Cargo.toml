@@ -1,6 +1,6 @@
 [package]
 name = "mediaproxy-common"
-version = "0.1.5"
+version = "0.2.0"
 authors = ["Åke Amcoff <ake.amcoff@gmail.com>"]
 edition = "2018"
 description = "Common files for the Media Proxy project."
