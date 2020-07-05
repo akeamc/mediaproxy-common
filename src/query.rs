@@ -1,4 +1,4 @@
-use crate::fields::{ResizeStrategy, OutputFormat};
+use crate::fields::{OutputFormat, ResizeStrategy};
 use base64::encode_config;
 use custom_error::custom_error;
 use serde::{Deserialize, Serialize};

@@ -44,7 +44,7 @@ pub enum ResizeStrategy {
 }
 
 impl Default for ResizeStrategy {
-  fn default() -> Self {
-    ResizeStrategy::Crop
-  }
+    fn default() -> Self {
+        ResizeStrategy::Crop
+    }
 }
