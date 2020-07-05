@@ -44,7 +44,7 @@ pub struct Query {
 
 impl Query {
     /// Convert a `Query` to a fingerprint.
-    /// 
+    ///
     /// In reality, this just serializes the `Query` to JSON and encodes it in base64.
     pub fn to_fingerprint(self: &Self) -> String {
         let json = serde_json::to_string(&self).unwrap();
@@ -52,13 +52,13 @@ impl Query {
     }
 
     /// Create a `Query` from a base64 encoded fingerprint. Fingerprints can be created with `Query.to_fingerprint()`.
-    /// 
+    ///
     /// # Arguments
-    /// 
+    ///
     /// * `fingerprint` - A base64 encoded `Query` in JSON.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// use doc::Query;
     /// let query = Query::from_fingerprint("eyJzb3VyY2UiOiJodHRwczovL2R1bW15aW1hZ2UuY29tLzYwMHg0MDAvMDAwL2ZmZiIsIndpZHRoIjpudWxsLCJoZWlnaHQiOm51bGwsImZvcm1hdCI6ImpwZWcifQ".to_string())
